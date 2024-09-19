@@ -1,0 +1,31 @@
+<div class="body">
+    <div class="background background1" [ngStyle]="{'background-image': 'linear-gradient(to top, black 15%, transparent), linear-gradient(to right, black 15%, transparent), url(' + imagenFondo1 + ')'}"></div>
+    <div class="background background2" [ngStyle]="{'background-image': 'linear-gradient(to top, black 15%, transparent), linear-gradient(to right, black 15%, transparent), url(' + imagenFondo2 + ')'}"></div>
+    <div class="d-flex flex-column flex-md-row">
+      <div class="navbar">
+        <app-navbar></app-navbar>
+      </div>
+      <div class="verPeli">
+        <div class="mb-2 d-flex align-items-center justify-content-center justify-content-md-start">
+          <img src="assets/netlix.png" alt="Netflix Logo" style="height: 150px;">
+          <h1 class="text-white ms-3">{{titulo}}</h1>
+        </div>
+        <div class="ms-3 mb-5 d-flex justify-content-center justify-content-md-start">
+          <button (click)="irADetalles()" class="button me-3 text-white play-button">Play</button>
+          <button class="button trailer-button" (click)="verTrailer()">Trailer</button>
+        </div>
+        <div class="proyectos w-100 d-flex flex-nowrap overflow-auto" style="scrollbar-width: none;">
+          <div *ngFor="let u of verImagenProyectos()" class="card-container" >
+            <div class="card" [ngStyle]="{'background-image': 'url(' + u + ')'}" (mousemove)="cambiarFondo(u)" (click)="irADetalles()" (touchstart)="cambiarFondo(u)" ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="video-container" [hidden]="!mostrarVideo">
+      <video #videoPlayer class="video-background" autoplay muted loop (loadedmetadata)="setVideoDuration($event)" (error)="handleVideoError($event)">
+        <source [src]="videos" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+  </div>
+  
